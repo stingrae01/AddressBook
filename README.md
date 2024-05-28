@@ -29,6 +29,6 @@ This project uses **python 3.7**. Ensure that you have the correct version.
     ```
 7. Run the command below to start the server. This will run the application in port 8000.\
     `uvicorn main:app --host 0.0.0.0 --port 8000`
-8. Visit the documentation page to see all the end points available.\
+8. When the server has started, visit the documentation page to see all the end points available.\
 http://localhost:8000/docs
 9. Use the `API_KEY` that you set in **Step 6** when making requests from the endpoints.
