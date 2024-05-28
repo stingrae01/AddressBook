@@ -4,6 +4,7 @@ Database connection module
 This module provides functions to establish connections to the database.
 """
 import uuid
+import os
 from sqlalchemy import create_engine, update, delete
 from sqlalchemy.orm import sessionmaker
 
@@ -11,7 +12,8 @@ from db_models import Base
 from db_models import Address
 from pydantic_models import AddressCreateUpdate
 
-DATABASE_URL = "sqlite:///./address_book.db"
+# Provide a default value in case the environment variables were not set.
+DATABASE_URL = os.environ.get("ADDRESS_BOOK_DATABASE_URL", "sqlite:///./address_book.db")
 
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
@@ -44,9 +46,10 @@ class DataBase():
         Creates an address in the database.
         """
         db = self.get_db()
-        db_address = Address(uid = str(uuid.uuid4()), name = address.name, country = address.country,
-            latitude = address.latitude, longitude = address.longitude,
-            street_num = address.street_num, street_name = address.street_name, city = address.city
+        db_address = Address(uid = str(uuid.uuid4()), name = address.name,
+            country = address.country, latitude = address.latitude,
+            longitude = address.longitude, street_num = address.street_num,
+            street_name = address.street_name, city = address.city
             )
         db.add(db_address)
         db.commit()
@@ -78,7 +81,7 @@ class DataBase():
             update(Address).
             where(Address.uid == uid).
             values(name = address.name, latitude = address.latitude,
-                longitude= address.longitude, city = address.city, 
+                longitude= address.longitude, city = address.city,
                 street_num = address.street_num,
                 street_name = address.street_name,
                 country = address.country)

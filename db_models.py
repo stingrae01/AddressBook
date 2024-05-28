@@ -11,7 +11,7 @@ class Address(Base):
     """
     __tablename__ = "addresses"
     id = Column(Integer, primary_key=True, index=True)
-    uid = Column(String, unique=True)    
+    uid = Column(String, unique=True)
     country = Column(String, index=True)
     street_name = Column(String)
     street_num = Column(String)
