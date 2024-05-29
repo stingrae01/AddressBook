@@ -31,4 +31,4 @@ This project uses **python 3.7**. Ensure that you have the correct version.
     `uvicorn main:app --host 0.0.0.0 --port 8000`
 8. When the server has started, visit the documentation page to see all the end points available.\
 http://localhost:8000/docs
-9. Use the `API_KEY` that you set in **Step 6** when making requests from the endpoints.
+9. To protect our endpoints, the user should provide a value for the `x-api-key` header. Use the `API_KEY` that you set in **Step 6** when making requests from the endpoints.
