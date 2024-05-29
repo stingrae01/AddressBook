@@ -44,17 +44,9 @@ db = DataBase()
 logger.info("Initializing tables")
 DataBase.create_all()
 
-# def validate_api_key(func):
-#     @wraps(func)
-#     def wrapper(*args, **kwargs):
-#         api_key = kwargs.get("api_key")
-#         if api_key != API_KEY:
-#             raise HTTPException(status_code=403, detail="Invalid API key")
-#         return func(*args, **kwargs)
-#     return wrapper
-
 def validate_api_key(func):
     """
+    Use this wrapper to protect an endpoint.
     Validate the api key provided. Throw an Exception when there is no api provided,
     or if it is invalid.
     """

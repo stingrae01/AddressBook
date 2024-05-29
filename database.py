@@ -56,7 +56,7 @@ class DataBase():
         db.refresh(db_address)
         return db_address
 
-    def read_address(self, uid):
+    def read_address(self, uid: str):
         """
         Retrieves an address from the database with the specified uid.
         """
@@ -72,7 +72,7 @@ class DataBase():
         db_address = db.query(Address).all()
         return db_address
 
-    def update_address(self, uid, address: AddressCreateUpdate):
+    def update_address(self, uid: str, address: AddressCreateUpdate):
         """
         Retrieves an address from the database with the specified uid.
         """
@@ -92,7 +92,7 @@ class DataBase():
         db.close()
         return address
 
-    def delete_address(self, uid):
+    def delete_address(self, uid: str):
         """
         Deletes an address from the database with the specified uid.
         """
