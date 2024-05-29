@@ -1,15 +1,20 @@
-import pytest
-from db_models import Address
+"""
+This module tests the database functions
+"""
+
 from pydantic_models import AddressCreateUpdate
 from database import DataBase
 
 def test_crud_address():
+    """
+    This function tests the CRUD operations for the addresses table
+    """
     db = DataBase()
-    
-    address = AddressCreateUpdate(name = "Test Name", street_num = "123", 
-    street_name = "Bloomfield Ave", city= "Montclair", 
+
+    address = AddressCreateUpdate(name = "Test Name", street_num = "123",
+    street_name = "Bloomfield Ave", city= "Montclair",
     latitude = 40.82442818040041, longitude = -74.21291214528885,
-    country = "USA")    
+    country = "USA")
 
     db_address = db.create_address(address = address)
     uid = db_address.uid
@@ -22,13 +27,13 @@ def test_crud_address():
     assert db_address.country == address.country
 
     db_address = db.read_address(uid)
-    assert db_address is not None    
+    assert db_address is not None
     str_name = "Fairview Lane"
     address.street_name = str_name
     db.update_address(uid, address)
     db_address = db.read_address(uid)
     assert db_address.street_name == str_name
-    
+
     db.delete_address(uid)
     db_address = db.read_address(uid)
     assert db_address is None
